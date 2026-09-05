@@ -6,8 +6,8 @@ export const addUser = async (email, passwordHash, firstName, lastName) => {
     return response.rows[0];
 };
 
-export const getUser = async (id) => {
-    const query = "SELECT * FROM users WHERE id = $1";
-    const response = await pool.query(query, [id]);
+export const getUser = async (email) => {
+    const query = "SELECT * FROM users WHERE email = $1";
+    const response = await pool.query(query, [email]);
     return response.rows[0];
 };
