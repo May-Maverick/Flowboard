@@ -1,8 +1,8 @@
 
-const errorHandler = (statusCode, message) => {
+const throwError = (statusCode, message) => {
     const error = new Error(message);
-    error.statusCode(statusCode);
+    error.statusCode = statusCode;
     throw error;
 }
 
-export default errorHandler;
+export default throwError;
