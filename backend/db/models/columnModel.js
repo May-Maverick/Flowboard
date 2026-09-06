@@ -3,8 +3,15 @@ import pool from "../../config/database.js";
 export const createColumn = async (boardId, columnName, columnPosition, cardLimit = 100) => {
     
     const query = "INSERT INTO columns (board_id, column_name, position, card_limit) VALUES ($1,$2,$3,$4) RETURNING *";
-    const response = await pool.query(query, [boardId, columnName, columnName, cardLimit]);
+    const response = await pool.query(query, [boardId, columnName, columnPosition, cardLimit]);
     return response.rows[0];
+}
+
+export const getColumns = async (boardId) => {
+    
+    const query = "SELECT * FROM columns WHERE board_id = $1";
+    const response = await pool.query(query, [boardId]);
+    return response.rows || [];
 }
 
 export const editColumn = async (columnId, attribute, value) => {

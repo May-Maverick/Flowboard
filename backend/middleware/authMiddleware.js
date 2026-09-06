@@ -24,3 +24,5 @@ const authMiddleware = async (req, res, next) => {
     req.userId = userObj.userId;
     next();
 }
+
+export default authMiddleware;

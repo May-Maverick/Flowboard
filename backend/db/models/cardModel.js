@@ -1,10 +1,17 @@
 import pool from "../../config/database.js";
 
-export const createCard = async (columnId, cardTitle, cardPosition, createdBy, assignedTo, cardPriority, cardDescription = "", dueDate="") => {
+export const createCard = async (columnId, cardTitle, cardPosition, createdBy, assignedTo, cardPriority, cardDescription = "", dueDate=null) => {
 
     const query = "INSERT INTO cards (column_id, title, card_description, position, created_by, assigned_to, due_date, card_priority) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *";
     const response = await pool.query(query, [columnId, cardTitle, cardDescription, cardPosition, createdBy, assignedTo, dueDate, cardPriority]);
     return response.rows[0];
+}
+
+export const getCards = async (columnId) => {
+    
+    const query = "SELECT * FROM cards WHERE column_id = $1";
+    const response = await pool.query(query, [columnId]);
+    return response.rows || [];
 }
 
 export const editCard = async(cardId, attribute, value) => {

@@ -7,6 +7,13 @@ export const createWorkspace = async(workspaceName, workspaceOwner, workspaceDes
     return response.rows[0];
 }
 
+export const getWorkspaces = async (ownerId) => {
+    
+    const query = "SELECT * FROM workspaces WHERE owner_id = $1";
+    const response = await pool.query(query, [ownerId]);
+    return response.rows || [];
+}
+
 export const deleteWorkspace = async(workspaceID) => {
     const query = "DELETE FROM workspaces WHERE id = $1 RETURNING *";
     const response = await pool.query(query, [workspaceID]);

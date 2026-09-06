@@ -7,6 +7,13 @@ export const createBoard = async (workspaceId, boardName, createdBy, boardDescri
     return response.rows[0];
 }
 
+export const getBoards = async (workspaceId) => {
+    
+    const query = "SELECT * FROM boards WHERE workspace_id = $1";
+    const response = await pool.query(query, [workspaceId]);
+    return response.rows || [];
+}
+
 export const editBoard = async (boardId, attribute, value) => {
     let query;
     switch (attribute) {
