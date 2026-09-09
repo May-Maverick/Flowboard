@@ -1,0 +1,19 @@
+.auth-input {
+    appearance: none;
+    padding: 5px 5px;
+    border: none;
+    color: var(--text-color);
+    background-color: var(--bg-secondary);
+    border-radius: 7px;
+    outline: none;
+
+    transition: border-color 0.15s ease-in-out;
+}
+
+.auth-input:focus {
+    border-color: var(--accent);
+}
+
+.auth-input:user-invalid {
+    border-color: red;
+}

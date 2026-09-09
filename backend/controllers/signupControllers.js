@@ -4,9 +4,9 @@ import bcrypt from "bcrypt";
 
 
 export const signupUser = async (req, res, next) => {
-    const {email, password, firstName, lastName} = req.body;
+    const {email, password, username, firstName, lastName} = req.body;
 
-    if(!(email && password && firstName && lastName)) {
+    if(!(email && password && username && firstName && lastName)) {
         throwError(401, "Invalid credentials entered");
     }
     const saltRounds = 10;
@@ -15,7 +15,7 @@ export const signupUser = async (req, res, next) => {
     if(!passwordHash) {
         throwError(401, "Failed to hash password");
     }
-    const user = await addUser(email, passwordHash, firstName, lastName);
+    const user = await addUser(email, passwordHash, username, firstName, lastName);
 
     if (!user) {
         throwError(401, "Failed to create user");

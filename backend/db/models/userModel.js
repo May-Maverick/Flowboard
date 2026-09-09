@@ -1,8 +1,8 @@
 import pool from "../../config/database.js";
 
-export const addUser = async (email, passwordHash, firstName, lastName) => {
-    const query = "INSERT INTO users (email, password_hash, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING *";
-    const response = await pool.query(query, [email, passwordHash, firstName, lastName]);
+export const addUser = async (email, passwordHash, username, firstName, lastName) => {
+    const query = "INSERT INTO users (email, password_hash, username,  first_name, last_name) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+    const response = await pool.query(query, [email, passwordHash, username, firstName, lastName]);
     return response.rows[0];
 };
 
