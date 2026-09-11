@@ -1,0 +1,29 @@
+.load-wrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 6px;
+
+}
+
+@keyframes pulse {
+    0%, 100% {transform: scaleY(1);}
+    50% {transform: scaleY(0.3);}
+}
+
+.load-bar {
+    height: 20px;
+    width: 5px;
+    background-color: var(--text-color);
+    border-radius: 30px;
+
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.load-bar:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.load-bar:nth-child(3) {
+    animation-delay: 0.3s;
+}

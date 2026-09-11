@@ -4,7 +4,7 @@ import SegmentedButton from "../../components/segmentedButton/SegmentedButton.js
 import { useState } from "react";
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { toggleTheme } from "../../hooks/helperFunctions.jsx";
+import { useElementAttribut, useLocalStorage } from "../../hooks/customHooks.jsx";
 
 function Auth() {
 
@@ -15,10 +15,9 @@ function Auth() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    useEffect(() => {
-        toggleTheme(theme);
-    }, [theme]);
-
+    
+    useLocalStorage("theme", theme);
+    useElementAttribut("data-theme", theme);
 
     useEffect(() => {
         navigate(`/auth/${authPage.toLowerCase()}`);
