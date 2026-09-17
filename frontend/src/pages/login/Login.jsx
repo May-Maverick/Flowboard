@@ -28,7 +28,7 @@ function Login() {
 
         if(result) {
             localStorage.setItem("token", result.token);
-            navigate("/dashboard/home");
+            navigate("/workspaces");
         } 
         
     }

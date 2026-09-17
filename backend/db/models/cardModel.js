@@ -42,6 +42,9 @@ export const editCard = async(cardId, attribute, value) => {
             query = "UPDATE cards SET card_priority = $1 WHERE id = $2 RETURNING *";
             break;
         }
+        default: {
+        throwError(400, `Invalid attribute: ${attribute}`);
+    }
     }
 
     const response = await pool.query(query, [value, cardId]);

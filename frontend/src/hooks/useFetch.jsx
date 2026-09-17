@@ -29,13 +29,13 @@ function useFetch() {
                 options.body = JSON.stringify(body);
             }
 
-            const response = await fetch(`http://localhost:5000${api}`, options);
+            const response = await fetch(`/api${api}`, options);
             
             const responseData = await response.json();
 
             if(!response.ok) {
                 setError(responseData.message);
-                return null;
+               return null;
             }
 
             setData(responseData);

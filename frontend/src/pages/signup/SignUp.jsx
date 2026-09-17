@@ -15,7 +15,7 @@ function SignUp() {
     const [error, setError] = useState("");
    
 
-    const {execute, data, loading, error: fetchError} = useFetch();
+    const {execute, loading, error: fetchError} = useFetch();
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
@@ -36,13 +36,16 @@ function SignUp() {
             return;
         }
 
+        setError("");
         const body = {firstName, lastName, email, password};
-
+        
         const result = await execute("post", "/signup", body);
+
+        
 
         if(result) {
             localStorage.setItem("token", result.token);
-            navigate("/dashboard/home");
+            navigate("/workspaces");
         } 
         
 

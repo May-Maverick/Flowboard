@@ -12,27 +12,33 @@
   letter-spacing: -0.02em;
 }
 
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f3ff;
-  --accent: #7c3aed;
-  --text-color: #18181b;
-  --text-muted: #71717a;
-  
-
-}
 
 [data-theme="Light"] {
   --bg-image: url("./assets/pexels-codioful-7130496.jpg");
 }
 
-[data-theme="Dark"] {
 
-  --bg-primary: #18151f;
-  --bg-secondary: #24202d;
-  --accent: #a78bfa;
-  --text-color: #fafafa;
-  --text-muted: #a1a1aa;
-  
+
+:root {
+  --bg-primary: #fcfbff;
+  --bg-secondary: #efeafb;
+  --accent: #6d4aff;
+  --accent-hover: #5636e0;
+  --text-color: #1b1730;
+  --text-muted: #6e6884;
+  --border: #e3def5;
+  --status-progress: #c98a1c;
+  --status-done: #2f9e68;
+  --status-blocked: #d9555f;
+}
+
+[data-theme="Dark"] {
+  --bg-primary: #14121f;
+  --bg-secondary: #1d1a2e;
+  --accent: #9c8cff;
+  --accent-hover: #b3a6ff;
+  --text-color: #f5f3fc;
+  --text-muted: #9891ac;
+  --border: #2c2745;
   --bg-image: url("./assets/18-fractal-glass-hero-bg.jpg");
 }

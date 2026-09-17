@@ -5,11 +5,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useElementAttribut, useLocalStorage } from "../../hooks/customHooks.jsx";
+import Dropdown from "../../components/dropdown/Dropdown.jsx";
 
 function Auth() {
 
     const [theme, setTheme] = useState("Light");
     const [authPage, setAuthPage] = useState("Login");
+    const [dropOption, setDropOption] = useState("Box1");
+    const dropOptions = ["Box1", "Box2", "Box3", "Box4"];
     const themes = ["Light", "Dark"];
     const authPages = ["Login", "Signup"];
     const navigate = useNavigate();
@@ -29,6 +32,7 @@ function Auth() {
             <div className="auth-nav">
                 <SegmentedButton width={200} height={40} setValue={setTheme} value={theme} options={themes} name={"theme"} />
                 <SegmentedButton width={200} height={40} setValue={setAuthPage} value={authPage} options={authPages} name={"authPage"} />
+                <Dropdown width={"120px"} height={"40px"} setValue={setDropOption} value={dropOption} options={dropOptions}  />
             </div>
             <div className="auth-form-container">
                 <motion.div className="auth-form" layout transition={{ duration: 0.35, ease: "easeInOut" }}>

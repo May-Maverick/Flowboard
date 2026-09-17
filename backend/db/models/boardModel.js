@@ -9,7 +9,19 @@ export const createBoard = async (workspaceId, boardName, createdBy, boardDescri
 
 export const getBoards = async (workspaceId) => {
     
-    const query = "SELECT * FROM boards WHERE workspace_id = $1";
+    const query = `SELECT 
+                    b.id AS board_id,
+                    b.board_name,
+                    b.updated_at,
+                    COUNT(*) FILTER (WHERE col.column_type = 'todo') AS todo_count,
+                    COUNT(*) FILTER (WHERE col.column_type = 'in_progress') AS in_progress_count,
+                    COUNT(*) FILTER (WHERE col.column_type = 'done') AS done_count,
+                    COUNT(*) FILTER (WHERE col.column_type = 'blocked') AS blocked_count
+                    FROM boards b
+                    LEFT JOIN columns col ON col.board_id = b.id
+                    LEFT JOIN cards cd ON cd.column_id = col.id
+                    WHERE b.workspace_id = $1
+                    GROUP BY b.id;`;
     const response = await pool.query(query, [workspaceId]);
     return response.rows || [];
 }
@@ -25,6 +37,9 @@ export const editBoard = async (boardId, attribute, value) => {
             query = "UPDATE boards SET board_description = $1 WHERE id = $2 RETURNING *";
             break;
         }
+        default: {
+        throwError(400, `Invalid attribute: ${attribute}`);
+    }
     }
 
     const response = await pool.query(query, [value, boardId]);
@@ -56,3 +71,4 @@ export const getFullBoard = async (boardId) =>  {
 
 
 }
+

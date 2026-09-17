@@ -3,12 +3,12 @@ import throwError from "../middleware/throwError.js";
 
 export const addColumn = async (req, res) => {
 
-    const {boardId, columnName, columnPosition, cardLimit} = req.body;
+    const {boardId, columnName, columnPosition, columnType, cardLimit} = req.body;
 
-    if(!(boardId && columnName && columnPosition === undefined)) {
+    if(!boardId || !columnName || columnPosition === undefined) {
         throwError(400, "Incomplete fields entered");
     }
-    const column = await createColumn(boardId, columnName,columnPosition, cardLimit);
+    const column = await createColumn(boardId, columnName, columnPosition, columnType, cardLimit);
 
     if (!column) {
         throwError(501, "Failed to create column");

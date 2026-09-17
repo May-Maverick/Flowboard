@@ -25,7 +25,7 @@ export const fetchBoards = async (req, res) => {
     const workspaceId = req.params.id;
 
     if(!workspaceId) {
-        throwError(400, "No board ID");
+        throwError(400, "No workspace ID");
     }
 
     const boards = await getBoards(workspaceId);
@@ -34,7 +34,9 @@ export const fetchBoards = async (req, res) => {
         throwError(501, "Failed to fetch boards");
     }
 
+
     res.status(200).json(boards);
+    
 }
 
 export const updateBoard = async (req, res) => {
@@ -99,7 +101,7 @@ export const fetchFullBoard = async (req, res) => {
     const columnsMap = new Map();
 
     records.forEach(record => {
-        if(!columnsMap.has(record.column_id)) {
+        if(record.column_id !== null && !columnsMap.has(record.column_id)) {
             columnsMap.set(record.column_id, {
                 id: record.column_id,
                 name: record.column_name,
@@ -126,3 +128,4 @@ export const fetchFullBoard = async (req, res) => {
 
     res.status(200).json(board);
 }
+

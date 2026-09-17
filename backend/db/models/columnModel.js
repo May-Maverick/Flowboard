@@ -1,9 +1,9 @@
 import pool from "../../config/database.js";
 
-export const createColumn = async (boardId, columnName, columnPosition, cardLimit = 100) => {
+export const createColumn = async (boardId, columnName, columnPosition, type="todo",  cardLimit = 100) => {
     
-    const query = "INSERT INTO columns (board_id, column_name, position, card_limit) VALUES ($1,$2,$3,$4) RETURNING *";
-    const response = await pool.query(query, [boardId, columnName, columnPosition, cardLimit]);
+    const query = "INSERT INTO columns (board_id, column_name, position, column_type, card_limit) VALUES ($1,$2,$3,$4,$5) RETURNING *";
+    const response = await pool.query(query, [boardId, columnName, columnPosition,type, cardLimit]);
     return response.rows[0];
 }
 
@@ -29,6 +29,9 @@ export const editColumn = async (columnId, attribute, value) => {
             query = "UPDATE columns SET card_limit = $1 WHERE id = $2 RETURNING *";
             break;
         }
+        default: {
+        throwError(400, `Invalid attribute: ${attribute}`);
+    }
 
     }
     const response = await pool.query(query, [value, columnId]);

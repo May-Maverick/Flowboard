@@ -9,7 +9,7 @@ export const createWorkspace = async(workspaceName, workspaceOwner, workspaceDes
 
 export const getWorkspaces = async (ownerId) => {
     
-    const query = "SELECT * FROM workspaces WHERE owner_id = $1";
+    const query = "SELECT id, workspace_name AS name, workspace_description AS description, owner_id FROM workspaces WHERE owner_id = $1";
     const response = await pool.query(query, [ownerId]);
     return response.rows || [];
 }
@@ -31,6 +31,9 @@ export const editWorkspace = async(workspaceID, attribute, value) => {
             query = "UPDATE workspaces SET workspace_name = $1 WHERE id = $2 RETURNING *";
             break;
         }
+        default: {
+        throwError(400, `Invalid attribute: ${attribute}`);
+    }
     }
 
     const response = await pool.query(query, [value, workspaceID]);

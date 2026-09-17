@@ -1,3 +1,6 @@
+import net from "node:net";
+net.setDefaultAutoSelectFamily(false);
+
 import "dotenv/config";
 import app from "./app.js";
 

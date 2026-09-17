@@ -5,6 +5,6 @@ import generateToken from "../controllers/authController.js"
 
 const loginRouter = express.Router();
 
-loginRouter.post("/", asyncHandler(login), generateToken);
+loginRouter.post("/", asyncHandler(login), asyncHandler(generateToken));
 
 export default loginRouter;

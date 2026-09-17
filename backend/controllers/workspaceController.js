@@ -1,9 +1,12 @@
+import { createBoard } from "../db/models/boardModel.js";
+import { createColumn } from "../db/models/columnModel.js";
 import { createWorkspace, getWorkspaces, editWorkspace, deleteWorkspace } from "../db/models/workspaceModel.js";
 import throwError from "../middleware/throwError.js";
 
-export const addWorkspace = async (req, res) => {
+export const addWorkspace = async (req, res, next) => {
 
-    const {workspaceName, workspaceDescription} = req.body;
+
+    const {workspaceName, workspaceDescription, initialSignup} = req.body;
 
     if(!workspaceName) {
         throwError(400, "Incomplete fields");
@@ -11,12 +14,35 @@ export const addWorkspace = async (req, res) => {
     const workspaceOwner = req.userId;
 
     const workspace = await createWorkspace(workspaceName, workspaceOwner, workspaceDescription);
+    
 
     if(!workspace) {
         throwError(501, "Failed to create workspace");
     }
 
+    //Dependancies
+    const board = await createBoard(workspace.id, "No title", workspaceOwner, "No description");
+
+    if(!board) {
+        throwError(501, "Failed to create board");
+    }
+
+    const columnToDo = await createColumn(board.id, "To Do", 1, "todo");
+    const columnInProgress = await createColumn(board.id, "In progress", 2, "in_progress");
+    const columnDone = await createColumn(board.id, "Done", 3, "done");
+    const columnBlocked = await createColumn(board.id, "Blocked", 4, "blocked");
+
+    if(!(columnToDo && columnInProgress && columnDone && columnBlocked)){
+        throwError(501, "Failed to create columns");
+    }
+
+    //Continue route on signup
+    if(initialSignup) {
+        req.body = {workspaceName: "School", initialSignup: true};
+        next();
+    } else{
     res.status(201).json();
+    }
 }
 
 export const fetchWorkspaces = async (req, res) => {
