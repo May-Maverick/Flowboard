@@ -2,4 +2,12 @@
     border: 2px solid var(--border);
     background-color: var(--bg-primary);
     border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+.board-last-update {
+    color: var(--text-muted);
 }

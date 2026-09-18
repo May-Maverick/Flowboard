@@ -1,19 +1,20 @@
-import { redirect } from "react-router-dom";
-import "./CompletionBar"
 
-function CompletionBar({height, width, level}) {
+import "./CompletionBar.css"
+
+
+function CompletionBar({height, width, details}) {
 
     
-    const color = {
-        backgroundColor: () => {
-            if(level === 1){
-                return "var(--status-blocked);";
-            } if (level === 2){
-                return "var(--status-progress);";
-            }
+    let colors;
 
-            return "var(--status-done);"
-        }
+    if(details?.blocked_count > 0) {
+        colors = ["var(--status-blocked)", "var(--border)", "var(--border)"];
+    } else if(details?.in_progress_count > 0) {
+        colors = ["var(--status-progress)", "var(--status-progress)", "var(--border)"];
+    } else if(details?.done_count > 0) {
+        colors = ["var(--status-done)", "var(--status-done)", "var(--status-done)"];
+    } else {
+        colors = ["var(--border)", "var(--border)", "var(--border)"];
     }
 
     const size = {
@@ -23,16 +24,14 @@ function CompletionBar({height, width, level}) {
 
     return (
         <>
-            <div className="completetion-bar" style={size}>
-                <div className={level === 1 ? "bar-colored" : "bar"} >
+            <div className="completion-bar" style={size}>
+                {colors?.map((color, index) => {
+                    return (
+                        <div key={`${color}${index}`} className="bar" style={{backgroundColor: color}}>
 
-                </div>
-                <div className={level === 2 ? "bar-colored" : "bar"}>
-
-                </div>
-                <div className={level === 1 ? "bar-colored" : "bar"} style={}>
-
-                </div>
+                        </div>
+                    )
+                })}
             </div>
         </>
     )

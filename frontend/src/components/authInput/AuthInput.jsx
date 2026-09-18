@@ -1,6 +1,6 @@
 import "./AuthInput.css"
 
-function AuthInput({setValue, value, width = 100, height=100, type="text", placeholder=""}) {
+function AuthInput({setValue, value, width = 100, height=100, type="text", placeholder="", name = ""}) {
 
 
     const size = {
@@ -11,6 +11,7 @@ function AuthInput({setValue, value, width = 100, height=100, type="text", place
     return (
         <>
             <input className="auth-input"
+            name={name}
             type={type} 
             onChange={(e) => setValue(e.target.value)} 
             value={value} 

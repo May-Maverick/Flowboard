@@ -22,8 +22,8 @@
 }
 
 .board-form-wrapper {
-    height: 100%;
-    width: 50%;
+    height: 80%;
+    width: 65%;
     display: flex;
     gap: 20px;
     justify-content: flex-end;
@@ -31,7 +31,7 @@
 }
 
 .board-form-wrapper form {
-    width: 40%;
+    width: 50%;
     height: 100%;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .board-form-wrapper button {
-    width: 40%;
+    width: 30%;
     height: 100%;
     border-radius: 15px;
     border: none;

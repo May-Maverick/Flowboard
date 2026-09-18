@@ -9,6 +9,7 @@ function useFetch() {
     async function execute(method, api, body) {
         setLoading(true);
         setError("");
+        setData(null);
         try {
             const options = {
                 method: method.toUpperCase(),

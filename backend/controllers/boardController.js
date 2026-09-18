@@ -17,6 +17,15 @@ export const addBoard = async (req, res) => {
         throwError(501, "Failed to create board");
     }
 
+    const columnToDo = await createColumn(board.id, "To Do", 1, "todo");
+    const columnInProgress = await createColumn(board.id, "In progress", 2, "in_progress");
+    const columnDone = await createColumn(board.id, "Done", 3, "done");
+    const columnBlocked = await createColumn(board.id, "Blocked", 4, "blocked");
+
+    if(!(columnToDo && columnInProgress && columnDone && columnBlocked)){
+        throwError(501, "Failed to create columns");
+    }
+
     res.status(201).json();
 }
 

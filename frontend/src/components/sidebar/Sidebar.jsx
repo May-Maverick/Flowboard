@@ -36,7 +36,7 @@ function Sidebar({workspaces}) {
             </div>
             <div className="sidebar-options-wrapper">
                 <div className="sidebar-options">
-                    <Dropdown height={"55px"} width={"220px"} value={workspaceName} setValue={changeUrl}  options={workspaceNames} />
+                    <Dropdown height={"40px"} width={"225px"} value={workspaceName} setValue={changeUrl}  options={workspaceNames} />
                   
                 </div>
                 <div className="sidebar-account">
