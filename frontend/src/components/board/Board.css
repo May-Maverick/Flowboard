@@ -5,9 +5,14 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
+    cursor: pointer;
 }
 
 
 .board-last-update {
     color: var(--text-muted);
+}
+
+.board-name {
+    color: var(--text-color);
 }

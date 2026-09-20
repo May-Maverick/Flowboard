@@ -3,7 +3,7 @@ import Dropdown from "../dropdown/Dropdown.jsx";
 import "./Sidebar.css"
 import { useNavigate, useParams } from "react-router-dom";
 
-function Sidebar({workspaces}) {
+function Sidebar({workspaces, isCollapsed, toggleCollapse}) {
 
   
     const navigate = useNavigate();
@@ -30,17 +30,20 @@ function Sidebar({workspaces}) {
 
     return (
         <>
-        <div className="sidebar">
+        <div className={isCollapsed ? "sidebar sidebar-collapsed" : "sidebar"}>
             <div className="sidebar-title">
-                <h2>Flowboard</h2>
+                {!isCollapsed && <h2>Flowboard</h2>}
             </div>
+            <button className="collapse-sidebar" onClick={toggleCollapse}>
+                <span className={isCollapsed ? "collapse-icon flipped" : "collapse-icon"}>‹</span>
+            </button>
             <div className="sidebar-options-wrapper">
                 <div className="sidebar-options">
-                    <Dropdown height={"40px"} width={"225px"} value={workspaceName} setValue={changeUrl}  options={workspaceNames} />
-                  
+                    {!isCollapsed && (
+                        <Dropdown height={"40px"} width={"225px"} value={workspaceName} setValue={changeUrl} options={workspaceNames} />
+                    )}
                 </div>
                 <div className="sidebar-account">
-
                 </div>
             </div>
         </div>

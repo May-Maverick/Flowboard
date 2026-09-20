@@ -4,8 +4,9 @@
     border: none;
     color: var(--text-color);
     background-color: var(--bg-secondary);
-    border-radius: 7px;
+    border-radius: 10px;
     outline: none;
+    
 
     transition: border-color 0.15s ease-in-out;
 }

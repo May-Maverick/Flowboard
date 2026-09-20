@@ -7,6 +7,7 @@ import Dashboard from "./layout/dashboardLayout/Dashboard.jsx";
 import Home from "./pages/home/Home.jsx";
 import Members from "./pages/members/Members.jsx";
 import Settings from "./pages/settings/Settings.jsx";
+import Kanban from "./pages/kanban/Kanban.jsx";
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
       <Route element={<ProtectedRoute />} >
         <Route path="/workspaces" element={<Dashboard />}>
           <Route path=":workspaceId" element={<Home />} />
-          <Route path=":workspaceId/board/:boardId"  />
+          <Route path=":workspaceId/board/:boardId" element={<Kanban />} />
           <Route path=":workspaceId/members" element={<Members />}/>
           <Route path="settings" element={<Settings/>} />
         </Route>

@@ -25,7 +25,7 @@ function Home() {
         }
 
         fetchBoards();
-    }, [workspaceId]);
+    }, [workspaceId, newBoard]);
 
     
     return (
@@ -53,7 +53,7 @@ function Home() {
                 {data?.map(board => {
 
                     return (
-                        <Board key={board?.board_id} width={"300px"} height={"150px"} details={board} />
+                        <Board key={board?.board_id}  details={board} />
                     )
                 })}
             </div>

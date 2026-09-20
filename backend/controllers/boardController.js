@@ -1,4 +1,5 @@
 import { createBoard, getBoards, editBoard, deleteBoard, getFullBoard } from "../db/models/boardModel.js";
+import { createColumn } from "../db/models/columnModel.js";
 import throwError from "../middleware/throwError.js";
 
 export const addBoard = async (req, res) => {
@@ -16,7 +17,6 @@ export const addBoard = async (req, res) => {
     if(!board) {
         throwError(501, "Failed to create board");
     }
-
     const columnToDo = await createColumn(board.id, "To Do", 1, "todo");
     const columnInProgress = await createColumn(board.id, "In progress", 2, "in_progress");
     const columnDone = await createColumn(board.id, "Done", 3, "done");
@@ -115,6 +115,7 @@ export const fetchFullBoard = async (req, res) => {
                 id: record.column_id,
                 name: record.column_name,
                 position: record.column_position,
+                type: record.column_type,
                 card_limit: record.card_limit,
                 cards: []
             });

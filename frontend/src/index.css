@@ -23,13 +23,18 @@
   --bg-primary: #fcfbff;
   --bg-secondary: #efeafb;
   --accent: #6d4aff;
+  --bg-accent: #8061fb5c;
   --accent-hover: #5636e0;
   --text-color: #1b1730;
   --text-muted: #6e6884;
   --border: #e3def5;
   --status-progress: #c98a1c;
+  --status-bg-progress: #dea23a5b;
   --status-done: #2f9e68;
+  --status-bg-done: #56c69052;
   --status-blocked: #d9555f;
+  --status-bg-blocked: #df727c5b;
+  --status-todo: #8c93c9;
 }
 
 [data-theme="Dark"] {
@@ -40,5 +45,6 @@
   --text-color: #f5f3fc;
   --text-muted: #9891ac;
   --border: #2c2745;
+  --status-todo: #a3aad9;
   --bg-image: url("./assets/18-fractal-glass-hero-bg.jpg");
 }

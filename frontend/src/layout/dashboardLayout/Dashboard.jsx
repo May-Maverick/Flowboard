@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useMatch, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./Dashboard.css"
 import { useEffect, useState } from "react";
@@ -8,6 +8,9 @@ function Dashboard() {
 
     
     const [workspaces, setWorkspaces] = useState([]);
+    const [isCollapsed, setIsCollapsed] = useState(false);
+
+    const isBoardRoute = Boolean(useMatch("/workspaces/:workspaceId/board/:boardId"));
 
     const {execute, loading, error} = useFetch();
     const navigate = useNavigate();
@@ -26,11 +29,21 @@ function Dashboard() {
 
     }, []);
 
+
+    useEffect(() => {
+        setIsCollapsed(isBoardRoute);
+    }, [isBoardRoute]);
+
+
+    const toggleCollapse = () => {
+        setIsCollapsed(prev => !prev);
+    }
+
     return (
         <>
         <div className="dashboard">
-            <div className="sidebar-wrapper">
-                <Sidebar workspaces={workspaces} />
+            <div className={isCollapsed ? "sidebar-wrapper collapsed" : "sidebar-wrapper"}>
+                <Sidebar workspaces={workspaces} isCollapsed={isCollapsed} toggleCollapse={toggleCollapse} />
             </div>
                 
             <div className="outlet-wrapper">

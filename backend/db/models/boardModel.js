@@ -13,10 +13,10 @@ export const getBoards = async (workspaceId) => {
                     b.id AS board_id,
                     b.board_name,
                     b.updated_at,
-                    COUNT(*) FILTER (WHERE col.column_type = 'todo') AS todo_count,
-                    COUNT(*) FILTER (WHERE col.column_type = 'in_progress') AS in_progress_count,
-                    COUNT(*) FILTER (WHERE col.column_type = 'done') AS done_count,
-                    COUNT(*) FILTER (WHERE col.column_type = 'blocked') AS blocked_count
+                    COUNT(cd.id) FILTER (WHERE col.column_type = 'todo') AS todo_count,
+                    COUNT(cd.id) FILTER (WHERE col.column_type = 'in_progress') AS in_progress_count,
+                    COUNT(cd.id) FILTER (WHERE col.column_type = 'done') AS done_count,
+                    COUNT(cd.id) FILTER (WHERE col.column_type = 'blocked') AS blocked_count
                     FROM boards b
                     LEFT JOIN columns col ON col.board_id = b.id
                     LEFT JOIN cards cd ON cd.column_id = col.id
@@ -56,7 +56,7 @@ export const deleteBoard = async(boardId) => {
 export const getFullBoard = async (boardId) =>  {
     const query = `SELECT
     b.id AS board_id, b.board_name, b.board_description,
-    c.id AS column_id, c.column_name, c.position AS column_position, c.card_limit,
+    c.id AS column_id, c.column_name, c.position AS column_position, c.card_limit, c.column_type,
     ca.id AS card_id, ca.title AS card_title, ca.position AS card_position,
     ca.card_priority, ca.due_date, ca.assigned_to
     FROM boards b

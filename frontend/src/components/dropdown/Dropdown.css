@@ -53,9 +53,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--bg-primary);
-    border: 1px solid var(--accent);
-    color: var(--text-color);
+    background-color: var(--bg-accent);
+    border: 4px solid var(--accent);
+    color: var(--accent);
+
     border-radius: 11px;
     font-weight: 600;
     
